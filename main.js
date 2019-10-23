@@ -36,17 +36,17 @@ const config = {
 ========================*/
 
 // 讀取 Excel 匯出 worksheets
-const workbook = XLSX.readFile('./excels/conference.xlsx', { cellStyles: true })
+const workbook = XLSX.readFile('./public/excels/conference.xlsx', { cellStyles: true })
 const worksheet = workbook.SheetNames
 const _seats = workbook.Sheets[worksheet[0]]
-const _students = workbook.Sheets[worksheet[1]]
+const _attendee = workbook.Sheets[worksheet[1]]
 
-// 處理 worksheets（過濾 _seats to array；轉換 _students to JSON）
+// 處理 worksheets（過濾 _seats to array；轉換 _attendee to JSON）
 const keys = Object.keys(_seats)
 const seats = keys.filter(key => {
   return (key.charAt(0) !== '!' && _seats[key].v)
 })
-const { content } = xlsxToJson(_students)
+const { content } = xlsxToJson(_attendee)
 
 // 處理使用者需求並合併為 worksheet object
 const template = genTemplate(config, seats, display.length - 1)
@@ -68,4 +68,4 @@ const wb = {
 }
 
 // 生成 Excel 文件
-XLSX.writeFile(wb, './excels/output.xlsx')
+XLSX.writeFile(wb, './public/excels/output.xlsx')
