@@ -47,9 +47,9 @@ const xlsxToJson = (worksheet) => {
 
   return { headers, content }
 }
-// 畫外框線，如 A2:C3 的正方形外框
+// 畫外框線，如 A1:C3 的正方形外框
 const drawFieldsBorder = (start, end) => {
-  // 如 (A1, C3) 
+
   const startCR = getColAndRow(start) // {A, 1}
   const endCR = getColAndRow(end) // {C, 3}
   const startCol = startCR.col // A
